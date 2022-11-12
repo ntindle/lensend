@@ -10,9 +10,15 @@ import {
   MediaQuery,
   Burger,
   useMantineTheme,
-  Container
+  Container,
+  Flex,
+  Button,
+  Select
 } from '@mantine/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQrcode } from '@fortawesome/free-solid-svg-icons'
 import SendMoney from '../components/send_money';
+import GetMoney from '../components/get_money';
 
 export default function AppShellDemo() {
   const theme = useMantineTheme();
@@ -56,19 +62,36 @@ export default function AppShellDemo() {
               />
             </MediaQuery>
 
-            <Text>Application header</Text>
+            <Select style={{}}
+              placeholder="Pick one"
+              searchable
+              nothingFound="No options"
+              data={['React', 'Angular', 'Svelte', 'Vue']}
+            />
+            <Container style={{ marginLeft: 'auto', marginRight: '0' }}>
+              <FontAwesomeIcon icon={faQrcode} />
+
+            </Container>
+
           </div>
         </Header>
       }
     >
-      <Container>
-        <Grid justify="center">
-          <Grid.Col span={3} style={{ minHeight: 120 }}>
-            <SendMoney/>
-          </Grid.Col>
-          <Grid.Col span={3} style={{ minHeight: 120 }}><RecieveMoney/></Grid.Col>
-        </Grid>
-      </Container>
+
+      <Flex
+        mih={50}
+        // bg="rgba(0, 0, 0, .3)"
+        gap="md"
+        justify="center"
+        align="center"
+        direction="row"
+        wrap="wrap"
+      >
+        <SendMoney />
+        <GetMoney />
+      </Flex>
+
+
     </AppShell>
   );
 }

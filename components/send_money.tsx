@@ -1,23 +1,33 @@
-import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUpLong } from '@fortawesome/free-solid-svg-icons'
+
 import {
-  AppShell,
-  Navbar,
-  Header,
-  Grid,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
-  Burger,
-  useMantineTheme,
-  Container
+    Text,
+    Stack,
+    Button,
+
 } from '@mantine/core';
-import { FloatingArrow } from '@mantine/core/lib/Floating';
 export default function SendMoney() {
     return (
-    <Container>
-        <Text>
-            Send Money
-        </Text>
-    </Container>);
-  }
+        <Button color="green" size="xl"
+            styles={(theme) => ({
+                root: {
+                    border: 0,
+                    height: 120,
+                width: 160,
+
+                    margin: 10,
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                },
+
+            })}>
+            <Stack>
+                <FontAwesomeIcon icon={faArrowUpLong} />
+                <Text>
+                    Send Money
+                </Text>
+            </Stack>
+        </Button>
+    );
+}
