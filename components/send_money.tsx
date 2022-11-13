@@ -114,7 +114,9 @@ export function SendMoneyButton(props: Props) {
                     marginBottom: 10,
 
                 }}>
-                    <ActionIcon variant="default" onClick={() => handlers.current.decrement()}>
+                    <ActionIcon variant="default" onClick={() => {
+                        handlers && handlers.current && handlers.current.decrement()}
+                        }>
                         –
                     </ActionIcon>
 
@@ -129,7 +131,7 @@ export function SendMoneyButton(props: Props) {
                         styles={{ input: { width: 54, textAlign: 'center' } }}
                     />
 
-                    <ActionIcon variant="default" onClick={() => handlers.current.increment()}>
+                    <ActionIcon variant="default" onClick={() => handlers && handlers.current && handlers.current.increment()}>
                         +
                     </ActionIcon>
                 </Group>}
