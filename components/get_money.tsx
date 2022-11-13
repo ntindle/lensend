@@ -24,7 +24,7 @@ export default function GetMoney() {
             <Stack>
                 <FontAwesomeIcon icon={faArrowDownLong} />
                 <Text>
-                    GetMoney
+                    Get Money
                 </Text>
             </Stack>
         </Button>
