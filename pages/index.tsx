@@ -1,32 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ethers } from 'ethers'
 
-import { client, challenge, authenticate, getFollowers } from './api/apollo'
+import { client, challenge, authenticate, getFollowers, getLensAccountsMatchingPrefix, SearchProfiles } from './api/apollo'
 
 
 import {
     AppShell,
-    Navbar,
     Header,
-    Grid,
     Footer,
-    Aside,
     Text,
-    MediaQuery,
-    Burger,
     useMantineTheme,
     Container,
     Flex,
     Button,
-    Select,
-    Stack
+    Stack,
 } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQrcode } from '@fortawesome/free-solid-svg-icons'
-import SendMoney from '../components/send_money';
+import {SendMoneyButton} from '../components/send_money';
 import GetMoney from '../components/get_money';
 import Post from '../components/post';
-import Router from 'next/router';
 
 export default function AppShellDemo() {
     const theme = useMantineTheme();
@@ -34,6 +27,9 @@ export default function AppShellDemo() {
 
     const [address, setAddress] = useState()
     const [token, setToken] = useState()
+
+
+
     useEffect(() => {
         /* when the app loads, check to see if the user has already connected their wallet */
         checkConnection()
@@ -88,13 +84,16 @@ export default function AppShellDemo() {
                 variables: { address }
             })
             console.log(JSON.parse(JSON.stringify(followers)))
-            
-            return((await followers).data.following.items)
+
+            return ((await followers).data.following.items)
         } catch (err) {
             console.log('Error getting followers: ', err)
         }
 
     }
+
+
+
     return (
         <AppShell
             styles={{
@@ -167,15 +166,6 @@ export default function AppShellDemo() {
                                 Lenso
                             </Text>
 
-                            <Select style={{marginLeft: 'auto'}}
-                                placeholder="Pick one"
-                                searchable
-                                nothingFound="No options"
-                                data={['a', 'b', 'c']}
-                                onClick={() =>{
-                                    get_followers();
-                                }}
-                            />
                             <Container style={{ marginLeft: 'auto', marginRight: '0' }}>
                                 <FontAwesomeIcon icon={faQrcode} />
 
@@ -215,12 +205,12 @@ export default function AppShellDemo() {
                             direction="row"
                             style={{ overflowX: 'auto' }}
                         >
-                            <SendMoney />
+                            <SendMoneyButton />
                             <GetMoney />
                         </Flex>
 
                         <Stack>
-                            <Post></Post>
+                            <Post from='nader.lens' to='ntindle.lens' ></Post>
                         </Stack>
                     </Container>
 

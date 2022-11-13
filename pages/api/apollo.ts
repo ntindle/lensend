@@ -52,16 +52,6 @@ query Following($address: EthereumAddress!) {
       profile {
         id
         name
-        bio
-        attributes {
-          displayType
-          traitType
-          key
-          value
-        }
-        followNftAddress
-        metadata
-        isDefault
         handle
         picture {
           ... on NftImage {
@@ -73,65 +63,13 @@ query Following($address: EthereumAddress!) {
           ... on MediaSet {
             original {
               url
-              width
-              height
-              mimeType
-            }
-            medium {
-              url
-              width
-              height
-              mimeType
-            }
-            small {
-              url
-              width
-              height
-              mimeType
-            }
-          }
-        }
-        coverPicture {
-          ... on NftImage {
-            contractAddress
-            tokenId
-            uri
-            verified
-          }
-          ... on MediaSet {
-            original {
-              url
-              width
-              height
-              mimeType
-            }
-            small {
-              width
-              url
-              height
-              mimeType
-            }
-            medium {
-              url
-              width
-              height
-              mimeType
             }
           }
         }
         ownedBy
-        dispatcher {
-          address
-          canUseRelay
-        }
         stats {
           totalFollowers
           totalFollowing
-          totalPosts
-          totalComments
-          totalMirrors
-          totalPublications
-          totalCollects
         }
       }
       totalAmountOfTimesFollowing
@@ -144,3 +82,112 @@ query Following($address: EthereumAddress!) {
   }
 }
 `
+
+export const getLensAccountsMatchingPrefix = gql`
+query LensAccountsMatchingPrefix($handle: Handle!) {
+  profiles(request: { handles: [$handle], limit: 5 }) {
+    items {
+      id
+      name
+      bio
+      attributes {
+        displayType
+        traitType
+        key
+        value
+      }
+      followNftAddress
+      metadata
+      isDefault
+      picture {
+        ... on NftImage {
+          contractAddress
+          tokenId
+          uri
+          verified
+        }
+        ... on MediaSet {
+          original {
+            url
+            mimeType
+          }
+        }
+        __typename
+      }
+      handle
+      ownedBy
+      dispatcher {
+        address
+        canUseRelay
+      }
+      stats {
+        totalFollowers
+        totalFollowing
+      }
+    }
+    pageInfo {
+      prev
+      next
+      totalCount
+    }
+  }
+}
+`
+
+
+
+export const SearchProfiles= gql`
+query SearchProfiles($request: SearchQueryRequest!) {
+  search(request: $request) {
+    ... on ProfileSearchResult {
+      items {
+        ...ProfileFields
+        __typename
+      }
+      pageInfo {
+        next
+        totalCount
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment ProfileFields on Profile {
+  id
+  name
+  handle
+  bio
+  ownedBy
+  isFollowedByMe
+  stats {
+    totalFollowers
+    totalFollowing
+    __typename
+  }
+  attributes {
+    key
+    value
+    __typename
+  }
+  picture {
+    ... on MediaSet {
+      original {
+        url
+        __typename
+      }
+      __typename
+    }
+    ... on NftImage {
+      uri
+      __typename
+    }
+    __typename
+  }
+  followModule {
+    __typename
+  }
+  __typename
+}`
