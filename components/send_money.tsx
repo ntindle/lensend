@@ -123,7 +123,7 @@ export function SendMoneyButton(props: Props) {
                     <NumberInput
                         hideControls
                         value={amount}
-                        onChange={(val) => setAmount(val)}
+                        onChange={(val) => val && setAmount(val)}
                         handlersRef={handlers}
                         max={10}
                         min={0}

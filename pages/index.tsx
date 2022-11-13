@@ -17,7 +17,7 @@ import {
 } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQrcode } from '@fortawesome/free-solid-svg-icons'
-import {SendMoneyButton} from '../components/send_money';
+import { SendMoneyButton } from '../components/send_money';
 import GetMoney from '../components/get_money';
 import Post from '../components/post';
 
@@ -35,14 +35,23 @@ export default function AppShellDemo() {
         checkConnection()
     }, [])
     async function checkConnection() {
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-        const accounts = await provider.listAccounts()
-        if (accounts.length) {
-            setAddress(accounts[0])
+        // @ts-ignore
+        if (window.ethereum) {
+            // @ts-ignore
+            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            const accounts = await provider.listAccounts()
+            if (accounts.length) {
+                // @ts-ignore
+                setAddress(accounts[0])
+            }
+        }
+        else {
+            console.log('No ethereum object found')
         }
     }
     async function connect() {
         /* this allows the user to connect their wallet */
+        // @ts-ignore
         const account = await window.ethereum.send('eth_requestAccounts')
         if (account.result.length) {
             setAddress(account.result[0])
@@ -55,6 +64,7 @@ export default function AppShellDemo() {
                 query: challenge,
                 variables: { address }
             })
+            // @ts-ignore
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner()
             /* ask the user to sign a message with the challenge info returned from the server */
