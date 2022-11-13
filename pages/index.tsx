@@ -144,12 +144,12 @@ export default function AppShellDemo() {
                     {
                         !address || !token &&
                         <Text>
-                            Lenso
+                            Lensend
                         </Text>
                     }                    {
                         !address &&
                         <Text>
-                            Lenso
+                            Lensend
                         </Text>
                     }
                     {
@@ -173,7 +173,7 @@ export default function AppShellDemo() {
                                 />
                             </MediaQuery> */}
                             <Text>
-                                Lenso
+                                Lensend
                             </Text>
 
                             <Container style={{ marginLeft: 'auto', marginRight: '0' }}>
