@@ -1,4 +1,4 @@
-import { Flex, Text } from "@mantine/core";
+import { Flex, Text, Title } from "@mantine/core";
 
 export type NumericOutputProps = {
     value: string;
@@ -14,9 +14,9 @@ export default function NumericOutput(props: NumericOutputProps) {
             direction="row"
             wrap="nowrap">
 
-            <Text size={'40px'}>
+            <Title size="h1">
                 {props.currency} {props.value}
-            </Text>
+            </Title>
         </Flex>
     )
 }
