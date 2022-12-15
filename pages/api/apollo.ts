@@ -154,7 +154,6 @@ query SearchProfiles($request: SearchQueryRequest!) {
     __typename
   }
 }
-
 fragment ProfileFields on Profile {
   id
   name
