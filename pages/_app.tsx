@@ -1,10 +1,12 @@
-import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
 import { MantineProvider } from '@mantine/core';
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import '@rainbow-me/rainbowkit/styles.css';
+import { rtlCache } from '../rtl-cache';
+
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -41,7 +43,7 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <MantineProvider withGlobalStyles withNormalizeCSS  emotionCache={rtlCache}>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <Component {...pageProps} />
