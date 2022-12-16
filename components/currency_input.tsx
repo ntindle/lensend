@@ -26,7 +26,12 @@ export default function CurrencyInput(props: SendRequestButtonsProps) {
             <Space h='xl' />
             <NumericInput onChange={(value) => {
                 if (value === '\b') {
+                    // if the value is a backspace, remove the last character
                     setAmount(amount.slice(0, -1))
+                    // if we don't have any more characters, set the amount to 0
+                    if (amount.length === 1) {
+                        setAmount('0')
+                    }
                     return
                 }
                 if (amount == '0') {
