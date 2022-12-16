@@ -1,6 +1,6 @@
 import { Header } from "@mantine/core";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import LensendLogo from "./lensend_logo";
+import LensendLogo from "./LensendLogo";
 
 export default function FrameHeader() {
     return (

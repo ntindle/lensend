@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Frame from '../components/frame';
+import Frame from '../components/Frame';
 
 const Home: NextPage = () => {
   return (

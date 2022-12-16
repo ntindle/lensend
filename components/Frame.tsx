@@ -3,9 +3,9 @@ import {
     Container,
     useMantineTheme,
 } from '@mantine/core';
-import FrameHeader from './header';
+import FrameHeader from './Header';
 import { useState } from 'react';
-import FrameFooter from './footer';
+import FrameFooter from './Footer';
 import HomePage from './HomePage';
 import BalancePage from './BalancePage';
 import ActivityPage from './ActivityPage';

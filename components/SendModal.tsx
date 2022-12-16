@@ -1,5 +1,6 @@
-import { Button, Container, Flex, Grid, Modal, Text } from "@mantine/core"
-import { IconX } from "@tabler/icons"
+import { Modal, Text } from "@mantine/core"
+import { useState } from "react"
+import SendRequestModalHeader from "./SendRequestModalHeader"
 
 export type SendModalProps = {
     currency: string
@@ -12,7 +13,7 @@ export type SendModalProps = {
 }
 
 export default function SendModal(props: SendModalProps) {
-
+    const [enabled, setEnabled] = useState(true)
     return (
         <Modal
             onClose={props.onClose}
@@ -24,21 +25,12 @@ export default function SendModal(props: SendModalProps) {
             centered
             withCloseButton={false}
         >
-            <>
-                <Flex mih={50}
-                    gap="md"
-                    justify="center"
-                    align="center"
-                    direction="row"
-                    wrap="wrap">
-                    <IconX onClick={props.onClose} />
-                    <div style={{ flex: '1' }} />
-                    <Text>{`${props.amount} ${props.currency}`}</Text>
-                    <div style={{ flex: '1' }} />
-
-                    <Button disabled radius={'xl'}>Send </Button>
-                </Flex>
-            </>
+            <SendRequestModalHeader text="Send"
+                amount={props.amount}
+                buttonStatus={enabled}
+                currency={props.currency}
+                onClose={props.onClose}
+            />
             <Text>{`${props.amount} ${props.currency}`}</Text>
         </Modal >
     )

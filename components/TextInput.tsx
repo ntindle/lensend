@@ -1,5 +1,4 @@
-import { ActionIcon, Box, CopyButton, TextInput, Tooltip } from "@mantine/core";
-import { IconCheck, IconCopy } from "@tabler/icons";
+import { Box, TextInput } from "@mantine/core";
 
 export type TextInputProps = {
     placeholder: string;

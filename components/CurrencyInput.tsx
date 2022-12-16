@@ -1,8 +1,8 @@
 import { Flex, Space, Stack } from "@mantine/core";
 import { useState } from "react";
-import CurrencySelector from "./currency_selector";
-import NumericInput from "./numeric_input";
-import NumericOutput from "./numeric_output";
+import CurrencySelector from "./CurrencySelector";
+import NumericInput from "./NumericInput";
+import NumericOutput from "./NumericOutput";
 
 export type SendRequestButtonsProps = {
     amount: string
