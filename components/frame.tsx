@@ -1,20 +1,20 @@
 import {
     AppShell,
-    Center,
     Container,
-    Footer,
-    Text,
     useMantineTheme,
 } from '@mantine/core';
 import FrameHeader from './header';
 import { useState } from 'react';
 import FrameFooter from './footer';
-import NumericInput from './numeric_input';
-import Home from './home';
+import HomePage from './HomePage';
+import BalancePage from './BalancePage';
+import ActivityPage from './ActivityPage';
+import SearchPage from './SearchPage';
+import QRPage from './QRPage';
 
 export default function Frame() {
     const theme = useMantineTheme();
-
+    const [page, setPage] = useState('home');
     return (
         <AppShell
             styles={{
@@ -26,14 +26,33 @@ export default function Frame() {
                 <></>
             }
             footer={
-                <FrameFooter />
+                <FrameFooter onActivityClick={() => {
+                    setPage('activity')
+                }}
+                    onBalanceClick={() => {
+                        setPage('balance')
+                    }}
+                    onHomeClick={() => {
+                        setPage('home')
+                    }}
+                    onSearchClick={() => {
+                        setPage('search')
+                    }}
+                    onQrClick={() => {
+                        setPage('qr')
+                    }}
+                />
             }
             header={
                 <FrameHeader />
             }
         >
             <Container size={'md'}>
-                <Home/>
+                {page === 'balance' && <BalancePage />}
+                {page === 'qr' && <QRPage />}
+                {page === 'home' && <HomePage />}
+                {page === 'activity' && <ActivityPage />}
+                {page === 'search' && <SearchPage />}
             </Container>
         </AppShell>
     );

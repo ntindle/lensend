@@ -4,9 +4,16 @@ import CurrencySelector from "./currency_selector";
 import NumericInput from "./numeric_input";
 import NumericOutput from "./numeric_output";
 
-export default function CurrencyInput() {
-    const [amount, setAmount] = useState('0')
-    const [currency, setCurrency] = useState<string>("USDC")
+export type SendRequestButtonsProps = {
+    amount: string
+    setAmount: (amount: string) => void
+    currency: string
+    setCurrency: (currency: string) => void
+}
+
+export default function CurrencyInput(props: SendRequestButtonsProps) {
+    const { amount, setAmount, currency, setCurrency } = props
+
     return (
         <>
             <NumericOutput currency={currency} value={amount} />

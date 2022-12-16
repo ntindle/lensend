@@ -10,7 +10,7 @@ import { rtlCache } from '../rtl-cache';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
-    // chain.mainnet,
+    chain.mainnet,
     chain.polygon,
     // chain.polygonMumbai,
     // chain.optimism,

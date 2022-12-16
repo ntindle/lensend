@@ -1,7 +1,15 @@
 import { Flex, Footer } from "@mantine/core";
 import { IconActivity, IconCoin, IconHome, IconQrcode, IconSearch } from "@tabler/icons";
 
-export default function FrameFooter() {
+export type FrameFooterProps = {
+    onHomeClick: () => void;
+    onSearchClick: () => void;
+    onActivityClick: () => void;
+    onBalanceClick: () => void;
+    onQrClick: () => void;
+}
+
+export default function FrameFooter(props: FrameFooterProps) {
     return (
         <Footer height={60} p="md" withBorder={false}>
             {/* <Text inline>
@@ -15,12 +23,11 @@ export default function FrameFooter() {
                 direction="row"
                 wrap="nowrap"
             >
-                <IconCoin>Balance</IconCoin>
-                <IconQrcode>QR</IconQrcode>
-                <IconHome>Home</IconHome>
-
-                <IconSearch>Find</IconSearch>
-                <IconActivity>Activity</IconActivity>
+                <IconCoin onClick={props.onBalanceClick}>Balance</IconCoin>
+                <IconQrcode onClick={props.onQrClick}>QR</IconQrcode>
+                <IconHome onClick={props.onHomeClick}>Home</IconHome>
+                <IconSearch onClick={props.onSearchClick}>Find</IconSearch>
+                <IconActivity onClick={props.onActivityClick}>Activity</IconActivity>
             </Flex>
         </Footer>
     )

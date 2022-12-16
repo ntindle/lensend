@@ -9,7 +9,10 @@ export default function FrameHeader() {
                 <LensendLogo />
                 {/* Push the rest to the end */}
                 <div style={{ flex: 1 }} />
-                <ConnectButton />
+                <ConnectButton accountStatus={{
+                    smallScreen: 'avatar',
+                    largeScreen: 'full',
+                }} />
             </div>
         </Header>
     )
