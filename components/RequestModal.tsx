@@ -1,6 +1,6 @@
 import { Modal, Text } from "@mantine/core"
 
-export type SendModalProps = {
+export type RequestModalProps = {
     currency: string
     // setCurrency: (currency: string) => void
     amount: string
@@ -10,14 +10,14 @@ export type SendModalProps = {
     opened: boolean
 }
 
-export default function SendModal(props: SendModalProps) {
+export default function RequestModal(props: RequestModalProps) {
 
     return (
         <Modal
             onClose={props.onClose}
             opened={props.opened}
             fullScreen
-            title="Send"
+            title="Request"
             transitionDuration={200}
             transitionTimingFunction="ease"
             transition="slide-up"

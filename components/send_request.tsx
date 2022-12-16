@@ -1,5 +1,4 @@
 import { Button, Flex } from "@mantine/core";
-import SendModal from "./SendModal";
 
 export type SendRequestButtonsProps = {
     setSendModalOpened: (opened: boolean) => void
@@ -16,10 +15,12 @@ export default function SendRequestButtons(props: SendRequestButtonsProps) {
             direction="row"
             wrap="nowrap">
             <Button variant="outline" color="blue" style={{ width: "100%" }} onClick={() => {
+                console.log("Send")
                 props.setSendModalOpened(true)
             }}>Send</Button>
             <div style={{ flex: 1 }} />
             <Button variant="outline" color="blue" style={{ width: "100%" }} onClick={() => {
+                console.log("Request")
                 props.setRequestModalOpened(true)
             }}>Request</Button>
         </Flex >
