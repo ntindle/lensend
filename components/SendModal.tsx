@@ -1,6 +1,8 @@
 import { Modal, Text } from "@mantine/core"
 import { useState } from "react"
+import ReasonField from "./ReasonField"
 import SendRequestModalHeader from "./SendRequestModalHeader"
+import ToField from "./ToField"
 
 export type SendModalProps = {
     currency: string
@@ -14,6 +16,8 @@ export type SendModalProps = {
 
 export default function SendModal(props: SendModalProps) {
     const [enabled, setEnabled] = useState(true)
+    const [to, setTo] = useState("")
+    const [reason, setReason] = useState("")
     return (
         <Modal
             onClose={props.onClose}
@@ -31,7 +35,8 @@ export default function SendModal(props: SendModalProps) {
                 currency={props.currency}
                 onClose={props.onClose}
             />
-            <Text>{`${props.amount} ${props.currency}`}</Text>
+            <ToField to={to} setTo={setTo}/>
+            <ReasonField reason={reason} setReason={setReason}/>
         </Modal >
     )
 }
