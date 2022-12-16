@@ -18,12 +18,7 @@ export default function SendModal(props: SendModalProps) {
             opened={props.opened}
             fullScreen
             title="Send"
-            transitionDuration={200}
-            transitionTimingFunction="ease"
-            transition="slide-up"
-            size="xl"
-            padding="sm"
-        >
+          >
             <Text>{`${props.amount} ${props.currency}`}</Text>
         </Modal>
     )

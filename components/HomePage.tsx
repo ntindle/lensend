@@ -13,12 +13,18 @@ export default function Home() {
         <>
             <SendModal currency={currency} amount={amount} opened={sendModalOpened} onClose={() => {
                 setSendModalOpened(false)
+                console.log("Closed Send Modal")
             }} />
             <RequestModal currency={currency} amount={amount} opened={requestModalOpened} onClose={() => {
                 setRequestModalOpened(false)
+                console.log("Closed Request Modal")
             }} />
             <CurrencyInput amount={amount} setAmount={setAmount} currency={currency} setCurrency={setCurrency} />
-            <SendRequestButtons setSendModalOpened={setSendModalOpened} setRequestModalOpened={setRequestModalOpened} />
+            <SendRequestButtons
+                sendModalOpened={sendModalOpened}
+                requestModalOpened={requestModalOpened}
+                setSendModalOpened={setSendModalOpened}
+                setRequestModalOpened={setRequestModalOpened} />
         </>
     )
 }

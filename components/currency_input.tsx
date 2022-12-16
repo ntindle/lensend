@@ -34,7 +34,6 @@ export default function CurrencyInput(props: SendRequestButtonsProps) {
                     return
                 }
                 setAmount(amount + value)
-                console.log(value)
             }}
             />
         </>
