@@ -6,12 +6,14 @@ import NumericOutput from "./numeric_output";
 
 export default function CurrencyInput() {
     const [amount, setAmount] = useState('0')
-    const [currency, setCurrency] = useState<string>('USDC')
+    const [currency, setCurrency] = useState<string>("USDC")
     return (
         <>
             <NumericOutput currency={currency} value={amount} />
             <Space h='xl' />
             <CurrencySelector onChange={(new_currency) => {
+                if (new_currency === "")
+                    return
                 setCurrency(new_currency)
             }} validValues={['ETH', 'MATIC', 'USDC', 'CODE']} defaultValue={currency} value={currency} />
             <Space h='xl' />
