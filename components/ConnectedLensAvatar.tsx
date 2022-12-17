@@ -30,7 +30,9 @@ export default function ConnectedLensAvatar(props: ConnectedLensAvatarProps) {
     }
     return (
         <>
-            <Avatar src={(currentProfile as Profile).picture?.__typename === 'MediaSet' ? ((currentProfile.picture as ProfileMedia) as MediaSet).original.url : (currentProfile.picture as NftImage)?.uri} />
+            { profilesData && profilesData.profiles && profilesData?.profiles?.items.length > 0 &&
+                <Avatar src={(currentProfile as Profile).picture?.__typename === 'MediaSet' ? ((currentProfile.picture as ProfileMedia) as MediaSet).original.url : (currentProfile.picture as NftImage)?.uri} />
+            }
         </>
     )
 }

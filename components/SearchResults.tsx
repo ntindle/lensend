@@ -22,7 +22,7 @@ export default function SearchResults(props: SearchResultsProps) {
             {loading && <Text>Loading...</Text>}
             {error && <Text>Error: {error.message}</Text>}
             <Stack>
-                {(profiles?.search as ProfileSearchResult).items.map((profile: Profile) => {
+                {profiles && (profiles?.search as ProfileSearchResult).items.map((profile: Profile) => {
                     return (
                         <Button key={profile.id}
                             onClick={(event) => {

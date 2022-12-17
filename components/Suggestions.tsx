@@ -20,7 +20,7 @@ export default function Suggestions(props: SuggestionsProps) {
         <>
             <Text>Suggestions</Text>
             <Stack spacing={"xs"}>
-                {profilesData?.exploreProfiles.items.map((profile) => {
+                {profilesData && profilesData?.exploreProfiles.items.map((profile) => {
                     return (
                         <Button key={profile.id} onClick={(event) => { props.onClick(event.currentTarget.textContent || "") }}>Send to @{profile.handle}</Button>
                     )
