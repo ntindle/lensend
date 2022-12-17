@@ -1,6 +1,7 @@
 import { Button, Modal, Text } from "@mantine/core"
 import { useState } from "react"
 import ReasonField from "./ReasonField"
+import SearchResults from "./SearchResults"
 import SendRequestModalHeader from "./SendRequestModalHeader"
 import Suggestions from "./Suggestions"
 import ToField from "./ToField"
@@ -41,11 +42,16 @@ export default function SendModal(props: SendModalProps) {
             <ToField to={to} setTo={setTo} />
             <ReasonField reason={reason} setReason={setReason} />
             {to === '' && <>
-                {/* <Suggestions onClick={(value) => {
-                    console.log(typeof(value))
-                }} /> */}
+                <Suggestions onClick={(value) => {
+                    console.log((value))
+                }} />
                 <Button disabled>Contacts</Button>
             </>
+            }
+            {to !== '' && 
+                <SearchResults query={to} onClick={(value) => {
+                    console.log((value))
+                }} />
             }
 
         </Modal >

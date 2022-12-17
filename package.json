@@ -30,6 +30,7 @@
     "@tiptap/extension-link": "^2.0.0-beta.207",
     "@tiptap/react": "^2.0.0-beta.207",
     "@tiptap/starter-kit": "^2.0.0-beta.207",
+    "@use-lens/cli": "^1.0.5",
     "dayjs": "^1.11.7",
     "embla-carousel-react": "^7.0.5",
     "ethers": "^5.0.0",
