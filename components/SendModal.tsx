@@ -1,9 +1,10 @@
-import { Button, Modal, Text } from "@mantine/core"
+import { Button, Modal, Space, Text } from "@mantine/core"
 import { Profile } from "@use-lens/react-apollo"
 import { useState } from "react"
 import FriendsSelector from "./FriendsSelector"
 import ReasonField from "./ReasonField"
 import SearchResults from "./SearchResults"
+import SendPreviewCard from "./SendPreviewCard"
 import SendRequestModalHeader from "./SendRequestModalHeader"
 import Suggestions from "./Suggestions"
 import ToField from "./ToField"
@@ -22,6 +23,7 @@ export default function SendModal(props: SendModalProps) {
     const [disabled, setDisabled] = useState(true)
     const [to, setTo] = useState("")
     const [reason, setReason] = useState("")
+    const [profile, setProfile] = useState<Profile | null>(null)
 
 
     return (
@@ -39,16 +41,28 @@ export default function SendModal(props: SendModalProps) {
                 amount={props.amount}
                 buttonStatus={disabled}
                 currency={props.currency}
-                onClose={props.onClose}
+                onClose={() => {
+                    setTo('')
+                    setReason('')
+                    setProfile(null)
+                    setDisabled(true)
+                    props.onClose()
+                }}
                 onClick={() => {
                     console.log("Send")
                 }}
             />
-            <ToField to={to} setTo={setTo}/>
+            <ToField to={to} setTo={(value) => {
+                setProfile(null)
+                setTo(value)
+            }} />
             <ReasonField reason={reason} setReason={setReason} />
-            {to === '' && <>
+
+            {/* Show the suggestions, friends, and search only when there is no profile selected */}
+            {to === '' && profile == null && <>
                 <Suggestions onClick={(value) => {
                     setTo(value.handle)
+                    setProfile(value)
                     setDisabled(false)
                     console.log((value))
                 }} />
@@ -57,12 +71,18 @@ export default function SendModal(props: SendModalProps) {
                 }} /> */}
             </>
             }
-            {to !== '' &&
+            {to !== '' && profile == null &&
                 <SearchResults query={to} onClick={(value) => {
                     setTo(value.handle)
+                    setProfile(value)
                     setDisabled(false)
                     console.log((value))
                 }} />
+            }
+            {profile != null && <>
+                <Space h="xl" />
+                <SendPreviewCard amount={props.amount} currency={props.currency} reciever={profile} reason={reason}/>
+            </>
             }
 
         </Modal >
