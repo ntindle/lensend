@@ -81,7 +81,8 @@ export default function SendModal(props: SendModalProps) {
             }
             {profile != null && <>
                 <Space h="xl" />
-                <SendPreviewCard amount={props.amount} currency={props.currency} reciever={profile} reason={reason}/>
+                <SendPreviewCard amount={props.amount} currency={props.currency} reciever={profile} reason={reason} />
+                <Space h="xl" />
             </>
             }
 
