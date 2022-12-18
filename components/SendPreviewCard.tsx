@@ -1,11 +1,13 @@
 import { Avatar, Card, Center, Image, Space, Stack, Text, Title } from "@mantine/core";
 import { MediaSet, NftImage, Profile, ProfileMedia } from "@use-lens/react-apollo";
+import Link from "next/link";
 
 export type SendPreviewCardProps = {
     amount: string
     currency: string
     reciever: Profile
     reason?: string
+    hash?: string
 }
 
 export default function SendPreviewCard(props: SendPreviewCardProps) {
@@ -34,6 +36,11 @@ export default function SendPreviewCard(props: SendPreviewCardProps) {
                     </Center>
                     <Center>
                         <Text>
+                            {props.reciever.ownedBy}
+                        </Text>
+                    </Center>
+                    <Center>
+                        <Text>
                             {props.reciever.name}
                         </Text>
                     </Center>
@@ -47,6 +54,19 @@ export default function SendPreviewCard(props: SendPreviewCardProps) {
                         <Center>
                             <Text>
                                 {props.reason}
+                            </Text>
+                        </Center>
+                    </Stack>
+                </Card.Section>
+            }
+            {
+                props.hash &&
+                <Card.Section>
+                    <Stack spacing={0}>
+                        <Center>
+                            <Text>
+                                View on Polygonscan <a href={`https://polygonscan.com/tx/${props.hash}`}>
+                                    https://polygonscan.com/tx/{props.hash}</a>
                             </Text>
                         </Center>
                     </Stack>

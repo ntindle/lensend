@@ -1,6 +1,8 @@
-import { Button, Modal, Space, Text } from "@mantine/core"
+import { Button, LoadingOverlay, Modal, Space, Text } from "@mantine/core"
 import { Profile } from "@use-lens/react-apollo"
+import { parseEther } from "ethers/lib/utils.js"
 import { useState } from "react"
+import { usePrepareSendTransaction, useSendTransaction, useWaitForTransaction } from "wagmi"
 import FriendsSelector from "./FriendsSelector"
 import ReasonField from "./ReasonField"
 import SearchResults from "./SearchResults"
@@ -26,6 +28,18 @@ export default function SendModal(props: SendModalProps) {
     const [profile, setProfile] = useState<Profile | null>(null)
 
 
+    const { config } = usePrepareSendTransaction({
+        request: {
+            to: profile?.ownedBy,
+            value: +props.amount ? parseEther(props.amount) : undefined,
+        },
+    })
+    const { data, sendTransaction } = useSendTransaction(config)
+    const { isLoading, isSuccess } = useWaitForTransaction({
+        hash: data?.hash,
+    })
+
+
     return (
         <Modal
             onClose={props.onClose}
@@ -37,6 +51,10 @@ export default function SendModal(props: SendModalProps) {
             centered
             withCloseButton={false}
         >
+            {isLoading &&
+                <LoadingOverlay visible />
+            }
+
             <SendRequestModalHeader text="Send"
                 amount={props.amount}
                 buttonStatus={disabled}
@@ -50,6 +68,8 @@ export default function SendModal(props: SendModalProps) {
                 }}
                 onClick={() => {
                     console.log("Send")
+                    sendTransaction?.()
+                    setDisabled(true)
                 }}
             />
             <ToField to={to} setTo={(value) => {
@@ -81,7 +101,7 @@ export default function SendModal(props: SendModalProps) {
             }
             {profile != null && <>
                 <Space h="xl" />
-                <SendPreviewCard amount={props.amount} currency={props.currency} reciever={profile} reason={reason} />
+                <SendPreviewCard amount={props.amount} currency={props.currency} reciever={profile} reason={reason} hash={data?.hash}/>
                 <Space h="xl" />
             </>
             }

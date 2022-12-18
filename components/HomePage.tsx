@@ -8,7 +8,7 @@ export default function Home() {
     const [sendModalOpened, setSendModalOpened] = useState(false);
     const [requestModalOpened, setRequestModalOpened] = useState(false);
     const [amount, setAmount] = useState('0');
-    const [currency, setCurrency] = useState("USDC");
+    const [currency, setCurrency] = useState("MATIC");
     return (
         <>
             <SendModal currency={currency} amount={amount} opened={sendModalOpened} onClose={() => {

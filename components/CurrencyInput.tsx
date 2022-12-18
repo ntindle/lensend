@@ -22,7 +22,8 @@ export default function CurrencyInput(props: SendRequestButtonsProps) {
                 if (new_currency === "")
                     return
                 setCurrency(new_currency)
-            }} validValues={['ETH', 'MATIC', 'USDC', 'CODE']} defaultValue={currency} value={currency} />
+            }} validValues={['MATIC']} defaultValue={currency} value={currency} />
+        {/* }} validValues={['ETH', 'MATIC', 'USDC', 'CODE']} defaultValue={currency} value={currency} /> */}
             <Space h='xl' />
             <NumericInput onChange={(value) => {
                 if (value === '\b') {
