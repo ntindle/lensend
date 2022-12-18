@@ -30,6 +30,9 @@ export default function RequestModal(props: RequestModalProps) {
                 buttonStatus={enabled}
                 currency={props.currency}
                 onClose={props.onClose}
+                onClick={() => {
+                    console.log("Request")
+                }}
             />
             <Text>{`${props.amount} ${props.currency}`}</Text>
         </Modal >

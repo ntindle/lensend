@@ -3,7 +3,7 @@ import { Profile, ProfileSearchResult, SearchRequestTypes, useSearchProfilesQuer
 
 export type SearchResultsProps = {
     query: string;
-    onClick: (value: string) => void;
+    onClick: (value: Profile) => void;
 };
 
 export default function SearchResults(props: SearchResultsProps) {
@@ -25,10 +25,7 @@ export default function SearchResults(props: SearchResultsProps) {
                 {profiles && (profiles?.search as ProfileSearchResult).items.map((profile: Profile) => {
                     return (
                         <Button key={profile.id}
-                            onClick={(event) => {
-                                props.onClick(event.currentTarget.textContent || "");
-                            }}
-                        >
+                            onClick={(event) => { props.onClick(profile) }}>
                             Send to @{profile.handle}
                         </Button>
                     );

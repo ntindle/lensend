@@ -1,8 +1,8 @@
 import { Button, Stack, Text } from "@mantine/core";
-import { ProfileSortCriteria, useExploreProfilesQuery } from "@use-lens/react-apollo";
+import { Profile, ProfileSearchResult, ProfileSortCriteria, useExploreProfilesQuery } from "@use-lens/react-apollo";
 
 export type SuggestionsProps = {
-    onClick: (value: string) => void
+    onClick: (value: Profile) => void
 }
 
 export default function Suggestions(props: SuggestionsProps) {
@@ -20,9 +20,9 @@ export default function Suggestions(props: SuggestionsProps) {
         <>
             <Text>Suggestions</Text>
             <Stack spacing={"xs"}>
-                {profilesData && profilesData?.exploreProfiles.items.map((profile) => {
+                {profilesData && (profilesData?.exploreProfiles as ProfileSearchResult).items.map((profile) => {
                     return (
-                        <Button key={profile.id} onClick={(event) => { props.onClick(event.currentTarget.textContent || "") }}>Send to @{profile.handle}</Button>
+                        <Button key={profile.id} onClick={(event) => { props.onClick(profile) }}>Send to @{profile.handle}</Button>
                     )
                 })
                 }

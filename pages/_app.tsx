@@ -8,7 +8,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { rtlCache } from '../rtl-cache';
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { createContext, useContext, useState } from 'react';
-
+import {Analytics} from '@vercel/analytics/react'
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -73,16 +73,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = getApolloClient(network);
 
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS  emotionCache={rtlCache}>
+    <MantineProvider withGlobalStyles withNormalizeCSS emotionCache={rtlCache}>
       <AppContext.Provider value={{ network, setNetwork, session, setSession }}>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-
-          <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-          </ApolloProvider>
-        </RainbowKitProvider>
-      </WagmiConfig>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <ApolloProvider client={apolloClient}>
+              <Component {...pageProps} />
+              <Analytics />
+            </ApolloProvider>
+          </RainbowKitProvider>
+        </WagmiConfig>
       </AppContext.Provider>
     </MantineProvider>
   );

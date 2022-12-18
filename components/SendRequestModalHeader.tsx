@@ -7,6 +7,7 @@ export type SendRequestModalHeaderProps = {
     onClose: () => void
     buttonStatus: boolean
     text: string
+    onClick: () => void
 }
 
 export default function SendRequestModalHeader(props: SendRequestModalHeaderProps){
@@ -22,7 +23,7 @@ export default function SendRequestModalHeader(props: SendRequestModalHeaderProp
         <Text>{`${props.amount} ${props.currency}`}</Text>
         <div style={{ flex: '1' }} />
 
-        <Button disabled={props.buttonStatus} radius={'xl'}>{props.text}</Button>
+        <Button disabled={props.buttonStatus} radius={'xl'} onClick={()=>props.onClick()} >{props.text}</Button>
     </Flex>
     )
 }

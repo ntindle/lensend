@@ -1,4 +1,6 @@
 import { Input, Text } from "@mantine/core"
+import { Profile } from "@use-lens/react-apollo"
+import { useEffect } from "react"
 
 export type ToFieldProps = {
     to: string
@@ -7,9 +9,18 @@ export type ToFieldProps = {
 }
 
 export default function ToField(props: ToFieldProps) {
+    console.log(props.to)
+
+
+    useEffect(() => {
+        console.log(props.to)
+        if (props.to === '') {
+            props.setTo('')
+        }
+    }, [props.to])
     return (
         <>
-             <Input icon={<Text>To:</Text>} placeholder={props.placeholder} onChange={(event) => props.setTo(event.currentTarget.value)}/>
+             <Input icon={<Text>To:</Text>} value={props.to} placeholder={props.placeholder} onChange={(event) => props.setTo(event.currentTarget.value)}/>
         </>
     )
 }
