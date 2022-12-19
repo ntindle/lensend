@@ -8,29 +8,35 @@ export type FriendsSelectorProps = {
 }
 
 
-export default function FriendsSelector(props : FriendsSelectorProps) {
-    const {address} = useAccount()
-    const {data: profilesData, loading, error} = useFollowingQuery(
+export default function FriendsSelector(props: FriendsSelectorProps) {
+    const { address } = useAccount()
+    const { data: profilesData, loading, error } = useFollowingQuery(
         {
             variables: {
                 request: {
                     address: address,
-                    limit: 10,
+                    limit: 4,
                 }
             }
         }
     )
     return (
         <>
-            <Text>Friends</Text>
+            <Text fz={'lg'}>Friends</Text>
             <Stack spacing={"xs"}>
-                {/* {profilesData && (profilesData?.following).items.map((profile) => {
-                    return (
-                        <Button key={profile.id} onClick={(event) => { props.onClick(profile) }}>Send to @{profile.handle}</Button>
-                    )
+                {profilesData && (profilesData?.following).items.map((following) => {
+                    if (following.profile == null) {
+                        return null
+                    }
+                    else {
+                        return (
+                            <Button key={following.profile.id}
+                                onClick={(event) => { props.onClick(following.profile as Profile) }}>
+                                Send to @{following.profile.handle}
+                            </Button>)
+                    }
                 })
-                } */}
-                <Button onClick={(event) => { }}>Send to @user1</Button>
+                }
             </Stack>
         </>
     );

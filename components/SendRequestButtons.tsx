@@ -21,12 +21,12 @@ export default function SendRequestButtons(props: SendRequestButtonsProps) {
                 props.setSendModalOpened(true)
                 console.log(props.sendModalOpened)
             }}>Send</Button>
-            <div style={{ flex: 1 }} />
-            <Button variant="outline" color="blue" style={{ width: "100%" }} onClick={() => {
+            {/* <div style={{ flex: 1 }} /> */}
+            {/* <Button variant="outline" color="blue" style={{ width: "100%" }} onClick={() => {
                 console.log("Request Modal Button Clicked")
                 props.setRequestModalOpened(true)
                 console.log(props.requestModalOpened)
-            }}>Request</Button>
+            }}>Request</Button> */}
         </Flex >
     )
 }

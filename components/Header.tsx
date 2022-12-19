@@ -3,7 +3,7 @@ import { Avatar, Button, Header } from "@mantine/core";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAuthenticateMutation, useChallengeLazyQuery, useGlobalProtocolStatsQuery } from "@use-lens/react-apollo";
 import { useContext, useEffect, useState } from "react";
-import { useAccount,  useSignMessage } from "wagmi";
+import { useAccount, useSignMessage } from "wagmi";
 import { AppContext } from "../pages/_app";
 import ConnectedLensAvatar from "./ConnectedLensAvatar";
 import LensendLogo from "./LensendLogo";
@@ -12,23 +12,23 @@ import LensendLogo from "./LensendLogo";
 export default function FrameHeader() {
 
     const [_isConnected, _setIsConnected] = useState(false);
-    
-    
-    const { network, setSession } = useContext(AppContext);
+
+
+    const { network, session, setSession } = useContext(AppContext);
     const { isConnected, address } = useAccount();
     const { signMessageAsync } = useSignMessage();
     const [lensConnected, setLensConnected] = useState(false);
-    
+
     const [loadChallenge] = useChallengeLazyQuery();
     const [authenticate] = useAuthenticateMutation();
-    
+
     // Sync state with the autoconnector 
     useEffect(() => {
         _setIsConnected(isConnected);
-      }, [isConnected]);
+    }, [isConnected]);
 
 
-
+    // TODO: Add refresh token logic
     const handleSignInWithLens = async () => {
         try {
             const challenge = await loadChallenge({
@@ -88,8 +88,8 @@ export default function FrameHeader() {
                         }} />
                     }
                     {
-                        lensConnected && 
-                        <ConnectedLensAvatar/>
+                        lensConnected &&
+                        <ConnectedLensAvatar />
                     }
                 </>
             </div>

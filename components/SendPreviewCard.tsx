@@ -1,4 +1,4 @@
-import { Avatar, Card, Center, Image, Space, Stack, Text, Title } from "@mantine/core";
+import { Avatar, Badge, Card, Center, Image, Space, Stack, Text, Title } from "@mantine/core";
 import { MediaSet, NftImage, Profile, ProfileMedia } from "@use-lens/react-apollo";
 import Link from "next/link";
 
@@ -8,6 +8,7 @@ export type SendPreviewCardProps = {
     reciever: Profile
     reason?: string
     hash?: string
+    isTransactionSuccess?: boolean
 }
 
 export default function SendPreviewCard(props: SendPreviewCardProps) {
@@ -30,18 +31,18 @@ export default function SendPreviewCard(props: SendPreviewCardProps) {
                         </Title>
                     </Center>
                     <Center>
+                        <Title order={2}>
+                            {props.reciever.name}
+                        </Title>
+                    </Center>
+                    <Center>
                         <Text>
                             @{props.reciever.handle}
                         </Text>
                     </Center>
                     <Center>
-                        <Text>
+                        <Text c="dimmed" lineClamp={1}>
                             {props.reciever.ownedBy}
-                        </Text>
-                    </Center>
-                    <Center>
-                        <Text>
-                            {props.reciever.name}
                         </Text>
                     </Center>
                 </Stack>
@@ -49,27 +50,45 @@ export default function SendPreviewCard(props: SendPreviewCardProps) {
             </Card.Section>
             {
                 props.reason &&
-                <Card.Section>
-                    <Stack spacing={0}>
-                        <Center>
+                <Card.Section withBorder>
+                    <Center>
+                        <Stack spacing={0}>
+                            <Text c="dimmed">
+                                Reason:
+                            </Text>
                             <Text>
                                 {props.reason}
                             </Text>
-                        </Center>
-                    </Stack>
+                        </Stack>
+                    </Center>
                 </Card.Section>
             }
             {
                 props.hash &&
                 <Card.Section>
+                    <Space h={'md'} />
                     <Stack spacing={0}>
                         <Center>
+                            {props.isTransactionSuccess === undefined &&
+                                <Badge size="xl" color="yellow">
+                                    Waiting for transaction to be mined...
+                                </Badge>
+                            }
+                            {props.isTransactionSuccess &&
+                                <Badge size="xl" color="green">
+                                    Transaction Successful
+                                </Badge>
+                            }
+                        </Center>
+                        <Center>
                             <Text>
-                                View on Polygonscan <a href={`https://polygonscan.com/tx/${props.hash}`}>
-                                    https://polygonscan.com/tx/{props.hash}</a>
+                                <a href={`https://polygonscan.com/tx/${props.hash}`}>
+                                    View on Polygonscan </a>
                             </Text>
                         </Center>
                     </Stack>
+
+
                 </Card.Section>
             }
         </Card>

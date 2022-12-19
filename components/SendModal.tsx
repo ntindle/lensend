@@ -86,9 +86,12 @@ export default function SendModal(props: SendModalProps) {
                     setDisabled(false)
                     console.log((value))
                 }} />
-                {/* <FriendsSelector onClick={(value) => {
+                <FriendsSelector onClick={(value) => {
+                    setTo(value.handle)
+                    setProfile(value)
+                    setDisabled(false)
                     console.log((value))
-                }} /> */}
+                }} />
             </>
             }
             {to !== '' && profile == null &&
@@ -101,7 +104,7 @@ export default function SendModal(props: SendModalProps) {
             }
             {profile != null && <>
                 <Space h="xl" />
-                <SendPreviewCard amount={props.amount} currency={props.currency} reciever={profile} reason={reason} hash={data?.hash}/>
+                <SendPreviewCard amount={props.amount} currency={props.currency} reciever={profile} reason={reason} hash={data?.hash} isTransactionSuccess={isSuccess} />
                 <Space h="xl" />
             </>
             }

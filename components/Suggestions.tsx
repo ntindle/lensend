@@ -7,6 +7,8 @@ export type SuggestionsProps = {
 
 export default function Suggestions(props: SuggestionsProps) {
 
+    // TODO: make this serve up suggestions based on the user's most interacted with profiles
+
     const {data: profilesData, loading, error } = useExploreProfilesQuery({
         variables:
         {
@@ -18,7 +20,7 @@ export default function Suggestions(props: SuggestionsProps) {
     })
     return (
         <>
-            <Text>Suggestions</Text>
+            <Text fz={'lg'}>Suggestions</Text>
             <Stack spacing={"xs"}>
                 {profilesData && (profilesData?.exploreProfiles as ProfileSearchResult).items.map((profile) => {
                     return (
