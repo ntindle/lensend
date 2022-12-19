@@ -51,16 +51,18 @@ export default function SendPreviewCard(props: SendPreviewCardProps) {
             {
                 props.reason &&
                 <Card.Section withBorder>
-                    <Center>
-                        <Stack spacing={0}>
+                    <Stack spacing={0}>
+                        <Center>
                             <Text c="dimmed">
                                 Reason:
                             </Text>
+                        </Center>
+                        <Center>
                             <Text>
                                 {props.reason}
                             </Text>
-                        </Stack>
-                    </Center>
+                        </Center>
+                    </Stack>
                 </Card.Section>
             }
             {
@@ -71,7 +73,7 @@ export default function SendPreviewCard(props: SendPreviewCardProps) {
                         <Center>
                             {props.isTransactionSuccess != true &&
                                 <Badge size="xl" color="yellow">
-                                    Waiting for transaction to be mined...
+                                    Waiting for Transaction
                                 </Badge>
                             }
                             {props.isTransactionSuccess &&
