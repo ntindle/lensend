@@ -4,12 +4,12 @@ import { parseEther } from "ethers/lib/utils.js"
 import { useState } from "react"
 import { usePrepareSendTransaction, useSendTransaction, useWaitForTransaction } from "wagmi"
 import FriendsSelector from "./FriendsSelector"
-import ReasonField from "./ReasonField"
+import ReasonField from "./UI/ReasonField"
 import SearchResults from "./SearchResults"
-import SendPreviewCard from "./SendPreviewCard"
-import SendRequestModalHeader from "./SendRequestModalHeader"
+import SendPreviewCard from "./UI/SendPreviewCard"
+import SendRequestModalHeader from "./UI/SendRequestModalHeader"
 import Suggestions from "./Suggestions"
-import ToField from "./ToField"
+import ToField from "./UI/ToField"
 
 export type SendModalProps = {
     currency: string

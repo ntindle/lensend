@@ -1,8 +1,8 @@
 import { Flex, Space, Stack } from "@mantine/core";
 import { useState } from "react";
-import CurrencySelector from "./CurrencySelector";
-import NumericInput from "./NumericInput";
-import NumericOutput from "./NumericOutput";
+import CurrencySelector from "./UI/CurrencySelector";
+import NumericInput from "./UI/NumericInput";
+import NumericOutput from "./UI/NumericOutput";
 
 export type SendRequestButtonsProps = {
     amount: string
@@ -23,7 +23,7 @@ export default function CurrencyInput(props: SendRequestButtonsProps) {
                     return
                 setCurrency(new_currency)
             }} validValues={['MATIC']} defaultValue={currency} value={currency} />
-        {/* }} validValues={['ETH', 'MATIC', 'USDC', 'CODE']} defaultValue={currency} value={currency} /> */}
+            {/* }} validValues={['ETH', 'MATIC', 'USDC', 'CODE']} defaultValue={currency} value={currency} /> */}
             <Space h='xl' />
             <NumericInput onChange={(value) => {
                 if (value === '\b') {

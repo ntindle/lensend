@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { useAccount, useSignMessage } from "wagmi";
 import { AppContext } from "../pages/_app";
 import ConnectedLensAvatar from "./ConnectedLensAvatar";
-import LensendLogo from "./LensendLogo";
+import LensendLogo from "./UI/LensendLogo";
 
 
 export default function FrameHeader() {

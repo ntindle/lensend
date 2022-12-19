@@ -9,10 +9,10 @@ export default function Suggestions(props: SuggestionsProps) {
 
     // TODO: make this serve up suggestions based on the user's most interacted with profiles
 
-    const {data: profilesData, loading, error } = useExploreProfilesQuery({
+    const { data: profilesData, loading, error } = useExploreProfilesQuery({
         variables:
         {
-            request:{
+            request: {
                 sortCriteria: ProfileSortCriteria.MostFollowers,
                 limit: 4
             }
@@ -28,9 +28,6 @@ export default function Suggestions(props: SuggestionsProps) {
                     )
                 })
                 }
-                {/* <Button onClick={(event) => { props.onClick(event.currentTarget.textContent || "") }}>Send to @user1</Button> */}
-                
-
             </Stack>
         </>
     )

@@ -2,7 +2,7 @@ import { useState } from "react";
 import CurrencyInput from "./CurrencyInput";
 import RequestModal from "./RequestModal";
 import SendModal from "./SendModal";
-import SendRequestButtons from "./SendRequestButtons";
+import SendRequestButtons from "./UI/SendRequestButtons";
 
 export default function Home() {
     const [sendModalOpened, setSendModalOpened] = useState(false);

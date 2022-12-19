@@ -1,6 +1,6 @@
 import { Modal, Text } from "@mantine/core"
 import { useState } from "react"
-import SendRequestModalHeader from "./SendRequestModalHeader"
+import SendRequestModalHeader from "./UI/SendRequestModalHeader"
 
 export type RequestModalProps = {
     currency: string

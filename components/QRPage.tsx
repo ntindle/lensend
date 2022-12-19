@@ -1,5 +1,5 @@
 import { Text } from "@mantine/core";
-import QRCode from "./QRCode";
+import QRCode from "./UI/QRCode";
 
 export default function QRPage() {
     return (
