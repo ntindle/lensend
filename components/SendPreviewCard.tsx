@@ -69,7 +69,7 @@ export default function SendPreviewCard(props: SendPreviewCardProps) {
                     <Space h={'md'} />
                     <Stack spacing={0}>
                         <Center>
-                            {props.isTransactionSuccess === undefined &&
+                            {props.isTransactionSuccess != true &&
                                 <Badge size="xl" color="yellow">
                                     Waiting for transaction to be mined...
                                 </Badge>
