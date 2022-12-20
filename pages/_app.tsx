@@ -7,8 +7,10 @@ import { publicProvider } from 'wagmi/providers/public';
 import '@rainbow-me/rainbowkit/styles.css';
 import { rtlCache } from '../rtl-cache';
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
-import { createContext, useContext, useState } from 'react';
-import {Analytics} from '@vercel/analytics/react'
+import { createContext, useContext, useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react'
+import { useLocalStorage } from '../components/LocalStorage';
+import { LensContextProvider } from '../components/Context/LensProvider';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -51,22 +53,31 @@ const wagmiClient = createClient({
 export const AppContext = createContext<{
   network: string,
   setNetwork: Function,
-  session: { accessToken?: string, refreshToken?: string },
-  setSession: Function
+  accessToken: string,
+  refreshToken: string,
+  setAccessToken: Function,
+  setRefreshToken: Function,
+  // session: { accessToken?: string, refreshToken?: string },
+  // setSession: Function
 }>({
   network: 'MAINNET',
   setNetwork: () => { },
-  session: { accessToken: undefined, refreshToken: undefined },
-  setSession: () => { }
+  accessToken: '',
+  refreshToken: '',
+  setAccessToken: () => { },
+  setRefreshToken: () => { },
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-
-  // const query = new URLSearchParams(window.location.search);
   // const initialNetwork = query.get('network') === 'TESTNET' ? 'TESTNET' : 'MAINNET';
+  // const query = new URLSearchParams(window.location.search);
+
+
   const initialNetwork = 'MAINNET';
   const [network] = useState(initialNetwork);
-  const [session, setSession] = useState({ accessToken: undefined, refreshToken: undefined });
+
+  // const [accessToken, setAccessToken] = useLocalStorage<string>('accessToken', '')
+  // const [refreshToken, setRefreshToken] = useLocalStorage<string>('refreshToken', '')
 
   const setNetwork = (network: string) => window.location.href = `${window.location.origin}/?network=${network}`;
 
@@ -74,7 +85,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS emotionCache={rtlCache}>
-      <AppContext.Provider value={{ network, setNetwork, session, setSession }}>
+      {/* <LensContextProvider> */}
+        {/* <AppContext.Provider value={{ network, setNetwork, accessToken, refreshToken, setAccessToken, setRefreshToken }}> */}
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
             <ApolloProvider client={apolloClient}>
@@ -83,7 +95,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             </ApolloProvider>
           </RainbowKitProvider>
         </WagmiConfig>
-      </AppContext.Provider>
+      {/* </LensContextProvider> */}
+      {/* </AppContext.Provider> */}
     </MantineProvider>
   );
 }

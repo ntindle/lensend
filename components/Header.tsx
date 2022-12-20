@@ -14,7 +14,7 @@ export default function FrameHeader() {
     const [_isConnected, _setIsConnected] = useState(false);
 
 
-    const { network, session, setSession } = useContext(AppContext);
+    const { network, accessToken, setAccessToken, refreshToken, setRefreshToken } = useContext(AppContext);
     const { isConnected, address } = useAccount();
     const { signMessageAsync } = useSignMessage();
     const [lensConnected, setLensConnected] = useState(false);
@@ -27,6 +27,9 @@ export default function FrameHeader() {
         _setIsConnected(isConnected);
     }, [isConnected]);
 
+    useEffect(() => {
+       console.log(accessToken)
+    }, [accessToken]);
 
     // TODO: Add refresh token logic
     const handleSignInWithLens = async () => {
@@ -49,13 +52,11 @@ export default function FrameHeader() {
             });
 
             if (auth?.data) {
-                setSession({
-                    accessToken: auth.data.authenticate.accessToken,
-                    refreshToken: auth.data.authenticate.refreshToken
-                });
+
+                setAccessToken(auth.data.authenticate.accessToken)
+                setRefreshToken(auth.data.authenticate.refreshToken)
 
                 setLensConnected(true);
-                console.log('Lens connected');
             } else {
                 return alert('Authentication was unsuccessful. Please, check if your "set up" is correct and try again');
             }
