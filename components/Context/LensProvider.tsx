@@ -1,40 +1,51 @@
 import React, { createContext, useContext, useState } from 'react';
+import { CookiesProvider, useCookies } from 'react-cookie';
 
-const LensContext = createContext(undefined);
 
-// Hook to provide access to context object
-export const UseLensContext = () => {
-  return useContext(LensContext);
+const LensContext = createContext<UseLensContextProps>({
+    cookies: {
+        token: '',
+        refreshToken: ''
+    },
+    setCookie: (name: string, value: any, options: any) => { },
+    removeCookie: (name: string, options?: any) => { }
+
+});
+
+
+export type UseLensContextProps = {
+    cookies: {
+        token?: any;
+        refreshToken?: any;
+    },
+    setCookie: (name: string, value: any, options?: any) => void,
+    removeCookie: (name: "token" | "refreshToken", options?: any) => void
+
 };
 
-function getInitialState(){
-    const token = localStorage.getItem('token');
-    const refreshToken = localStorage.getItem('refreshToken');
-    return { token, refreshToken } ? { token, refreshToken } : { token: null, refreshToken: null };
-}
+// Hook to provide access to context object
+export const UseLensContext = (): UseLensContextProps => {
+    return useContext(LensContext);
+};
+
+export type LensContextProviderProps = {
+    children: React.ReactNode;
+};
 
 
 // Provider component to wrap app and provide context object
-export const LensContextProvider = ({children }) => {
-  const [session, setSession] = useState(getInitialState());
-  const globalValue = "Global Value"
+export const LensContextProvider = ({ children }: LensContextProviderProps) => {
+    const [cookies, setCookie, removeCookie] = useCookies(['token', 'refreshToken']);
 
-  // Assign React state and constants to context object
-  const AppContextObject = {
-    sessionValue:{
-          session: session, setSession: setSession
-    },
-    global:{
-          globalValue  
-    } 
-  };
-  return (
-    <LensContext.Provider value={AppContextObject}>
-      {children}
-    </LensContext.Provider>
-  );
-};
-
-LensContextProvider.propTypes = {
-  children: React.Fragment,
+    // Assign React state and constants to context object
+    const AppContextObject = {
+        cookies, setCookie, removeCookie
+    };
+    return (
+        <CookiesProvider >
+            <LensContext.Provider value={AppContextObject}>
+                {children}
+            </LensContext.Provider>
+        </CookiesProvider >
+    );
 };

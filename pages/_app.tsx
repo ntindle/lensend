@@ -85,7 +85,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS emotionCache={rtlCache}>
-      {/* <LensContextProvider> */}
+      <LensContextProvider>
         {/* <AppContext.Provider value={{ network, setNetwork, accessToken, refreshToken, setAccessToken, setRefreshToken }}> */}
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
@@ -95,7 +95,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </ApolloProvider>
           </RainbowKitProvider>
         </WagmiConfig>
-      {/* </LensContextProvider> */}
+      </LensContextProvider>
       {/* </AppContext.Provider> */}
     </MantineProvider>
   );

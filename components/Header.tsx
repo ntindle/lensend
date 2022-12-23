@@ -4,9 +4,11 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAuthenticateMutation, useChallengeLazyQuery, useGlobalProtocolStatsQuery } from "@use-lens/react-apollo";
 import { useContext, useEffect, useState } from "react";
 import { useAccount, useSignMessage } from "wagmi";
-import { AppContext } from "../pages/_app";
+// import { AppContext } from "../pages/_app";
 import ConnectedLensAvatar from "./ConnectedLensAvatar";
+import { UseLensContext } from "./Context/LensProvider";
 import LensendLogo from "./UI/LensendLogo";
+
 
 
 export default function FrameHeader() {
@@ -14,7 +16,8 @@ export default function FrameHeader() {
     const [_isConnected, _setIsConnected] = useState(false);
 
 
-    const { network, accessToken, setAccessToken, refreshToken, setRefreshToken } = useContext(AppContext);
+    // const { network, accessToken, setAccessToken, refreshToken, setRefreshToken } = useContext(AppContext);
+    const { cookies, removeCookie, setCookie } = UseLensContext();
     const { isConnected, address } = useAccount();
     const { signMessageAsync } = useSignMessage();
     const [lensConnected, setLensConnected] = useState(false);
@@ -28,8 +31,8 @@ export default function FrameHeader() {
     }, [isConnected]);
 
     useEffect(() => {
-       console.log(accessToken)
-    }, [accessToken]);
+        console.log(Date(), cookies.token)
+    }, [cookies.token]);
 
     // TODO: Add refresh token logic
     const handleSignInWithLens = async () => {
@@ -52,9 +55,8 @@ export default function FrameHeader() {
             });
 
             if (auth?.data) {
-
-                setAccessToken(auth.data.authenticate.accessToken)
-                setRefreshToken(auth.data.authenticate.refreshToken)
+                setCookie('token', auth.data.authenticate.accessToken)
+                setCookie('refreshToken', auth.data.authenticate.refreshToken)
 
                 setLensConnected(true);
             } else {
